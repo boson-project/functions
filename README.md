@@ -1,5 +1,5 @@
 # Boson Project FAQ
-Frequently asked questions about Boson Project
+Frequently asked questions about Boson Project.
 
 ## What is Boson Project?
 Boson Project is a collection of tooling that enables developers to create and
@@ -11,54 +11,46 @@ project are listed here.
 * A `faas` CLI for initializing, creating and deploying functions as a Knative Service
 * Knative Serving and Eventing as the platform on which it all runs
 
-### Tooling and Architecture
+## How mature is the Boson Project?
+Boson started out as a proof of concept project in mid 2020 and is currently under
+active development. We anticipate a limited Developer Preview in late fall 2020.
+
+## Tooling and Architecture
 
 The primary tooling used by a function developer is the
 [`faas` CLI](https://github.com/boson-project/faas). Developers use this CLI to create
-new function projects and deploy them to a Kubernetes cluster running both Serving
-and Eventing as a Knative `Service`. During the deployment process, the developer's
-function code is combined with a runtime framework (for example Quarkus or Node.js)
-and a platform proxy API (aka [`grid`](https://github.com/boson-project/grid)) using
-the CNCF Buildpack APIs to create a runnable OCI container.
+new function projects and deploy them to a Kubernetes cluster running Knative Serving
+and Eventing. During deployment, the developer's function code is combined with a runtime
+framework (for example Quarkus or Node.js) and a platform proxy API
+(aka [`grid`](https://github.com/boson-project/grid)) using the CNCF Buildpack APIs to
+create a runnable OCI container.
 
-### Project Initialization and Deployment
+## Using Boson Functions
 
-To create a new function project, a developer uses the CLI.
+For Function projects, a developer uses the `faas` CLI for project creation and
+deployment. To get started using Boson Functions now, please follow the
+[step by step tutorial](tutorial.md).
 
-```sh
-faas create new.fn.example.com --runtime nodejs --registry docker.io/johndoe --trigger http -y
-```
-Where `docker.io/johndoe` is needed to be replaced with a registry/repository name in which 
-developer has write access.
+### Function Builds
 
-This will create a new function project in the current directory and will instruct the CLI
-to use Docker and Buildpack APIs to create a runnable container image which is then deployed to Knative.  
-
-For more information on `faas` CLI, please follow 
-[Function Developer's Guide](https://github.com/boson-project/faas/blob/develop/docs/developers_guide.md).
-
+The `faas` CLI uses the CNCF Buildpack API to create a container image. The
+[buildpacks](https://github.com/boson-project/buildpacks/)
+are based on and extend Red Hat UBI 8 and UBI 8 Minimal images.
 
 ![Boson Project Build](assets/init-build.png)
 
-Once the container image has been created, the CLI will deploy it as a Knative service
-on the cluster currently active in `~/.kube/config`. Also running in the image is the
+### Function Deployments
+
+Once a container image has been created, the CLI can deploy it as a Knative service
+on the cluster currently active in `~/.kube/config`.
+
+Future development will also have a second process running in the image. This is the
 Boson `grid`. This service, has REST endpoints for platform-agnostic
 [Subscription](https://github.com/cloudevents/spec/blob/master/subscriptions-api.md) and
 [Discovery](https://github.com/cloudevents/spec/blob/master/discovery.md) APIs, allowing
 the function to subscribe to event sources upon startup.
 
 ![Boson Function Runtime](assets/function-runtime.png)
-
-
-## How mature is the Boson Project?
-Boson started out as a proof of concept project in mid 2020 and is currently under
-active development. However, there are as yet no "official" releases of any tooling
-other than Knative Serving and Eventing, which is separate and distinct from Boson.
-
-## What is the difference between Boson and OpenWhisk?
-While Boson is explicitly built for the Knative platform, OpenWhisk is a different
-beast entirely. It is not possible to run Boson Functions on OpenWhisk nor is it
-possible to run OpenWhisk functions on Boson.
 
 ## How are Boson Functions invoked?
 Boson Functions are deployed as Knative Services, so they are invoked by simple
@@ -93,7 +85,6 @@ module.exports = async function (context) {
 };
 ```
 
-Note that the function is `async` and returns a `Promise`, however, this is not required.
 This function is from the default template used when creating a Node.js project using
 the `faas` CLI and is expected to be invoked with a `CloudEvent`. To access the raw HTTP
 request, there are properties on the `context` object that is provided. For example,
@@ -125,19 +116,19 @@ function handleGet(context) {
 };
 ```
 
-As you can see from this example, a Boson Function project may contain more than
-a single function. Only the exported function will be invoked.
+A Boson Function project may contain more than a single function. Howver, only the
+function exported from `index.js` will be invoked.
 
 ## Can I run my functions on OpenShift?
-The Boson Project is designed to work well both on OpenShift with the Serverless
-Operator installed, or vanilla Kubernetes with Knative.
+The Boson Project is designed to work both on OpenShift with the Serverless
+Operator installed, or Kubernetes with Knative.
 
-## How can I get started using Boson Functions?
-Boson Functions are still under active development. If you would like to try working
-with Boson, download our [`faas`](https://github.com/boson-project/faas) CLI. If you
-don't already have an OpenShift instance with Serverless installed, or a Kubernetes
-cluster with Knative Serving and Eventing, you can follow our
+## Provisioning a Cluster
+If you don't already have an OpenShift instance with Serverless installed, or a
+Kubernetes cluster with Knative Serving and Eventing, you can follow our
 [Getting Started with Kubernetes Guide](https://github.com/boson-project/faas/blob/develop/docs/getting_started_kubernetes.md) to provision a cluster for function deployment.
+Or follow our instructions for setting up a [kind cluster]('kind-setup.md') on
+your local system.
 
 ## Who is behind Boson Project?
 Boson Functions are a project from Red Hat.
@@ -157,7 +148,7 @@ Boson Functions are a project from Red Hat.
 
 ## What are the application types and use cases/user stories for Boson Functions?
 There are varieties of application types and user stories that could be acheived using Functions.
-Even Driven is the pattern that is at heart of the Functions and any Event Driven architecture could benefit from it. 
+Even Driven is the pattern that is at heart of the Functions and any Event Driven architecture could benefit from it.
 Some examples are:
   - E-Commerce website:
      - Function for Authentication that could show a personalized page.
@@ -166,16 +157,16 @@ Some examples are:
      - Function for Recommendation
      - Cashless Payment System
 
-  - Media File Processing: 
+  - Media File Processing:
     - Change the format of Files
     - Generating thumbnails version of images
     - Uploading thumbnails version of images to profile/dashboard
- 
+
   - Data Transformation
     - Adding metadata to existing data
     - Combining data from another source
     - Converting the format of the data
-    - Restructuring the data 
+    - Restructuring the data
     - Normalization of the data
 
  - Scheduled Jobs
