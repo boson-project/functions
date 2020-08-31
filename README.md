@@ -44,7 +44,7 @@ container image which can then be deployed to Knative.
 Once the container image has been created, the CLI will deploy it as a Knative service
 on the cluster currently active in `~/.kube/config`. Also running in the image is the
 Boson `grid`. This service, has REST endpoints for platform-agnostic
-[Subscription(https://github.com/cloudevents/spec/blob/master/discovery.md)] and
+[Subscription](https://github.com/cloudevents/spec/blob/master/discovery.md) and
 [Discovery](https://github.com/cloudevents/spec/blob/master/discovery.md) APIs, allowing
 the function to subscribe to event sources upon startup.
 
