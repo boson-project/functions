@@ -11,7 +11,45 @@ project are listed here.
 * A `faas` CLI for initializing, creating and deploying functions as a Knative Service
 * Knative Serving and Eventing as the platform on which it all runs
 
-![Boson Project Architecture](assets/architecture.png)
+### Tooling and Architecture
+
+The primary tooling used by a function developer is the
+[`faas` CLI](https://github.com/boson-project/faas). Developers use this CLI to create
+new function projects and deploy them to a Kubernetes cluster running both Serving
+and Eventing as a Knative `Service`. During the deployment process, the developer's
+function code is combined with a runtime framework (for example Quarkus or Node.js)
+and a platform proxy API (aka [`grid`](https://github.com/boson-project/grid)) using
+the CNCF buildpack APIs to create a runnable OCI container.
+
+### Project Initialization and Deployment
+
+To create a new function project, a developer uses the CLI.
+
+```sh
+faas init new.fn.dev --language nodejs
+```
+
+This will create a new function project in `./www.fn.dev`. To deploy the function is
+also quite simple.
+
+```sh
+faas deploy
+```
+
+This will instruct the CLI to use Docker and Buildpack APIs to create a runnable
+container image which can then be deployed to Knative.
+
+![Boson Project Build](assets/init-build.png)
+
+Once the container image has been created, the CLI will deploy it as a Knative service
+on the cluster currently active in `~/.kube/config`. Also running in the image is the
+Boson `grid`. This service, has REST endpoints for platform-agnostic
+[Subscription(https://github.com/cloudevents/spec/blob/master/discovery.md)] and
+[Discovery](https://github.com/cloudevents/spec/blob/master/discovery.md) APIs, allowing
+the function to subscribe to event sources upon startup.
+
+![Boson Function Runtime](assets/function-runtime.png)
+
 
 ## How mature is the Boson Project?
 Boson started out as a proof of concept project in mid 2020 and is currently under
@@ -96,13 +134,15 @@ The Boson Project is designed to work well both on OpenShift with the Serverless
 Operator installed, or vanilla Kubernetes with Knative.
 
 ## How can I get started using Boson Functions?
-Boson Functions are still under active development.
-
-TODO: Describe how to hack your way through the jungle
+Boson Functions are still under active development. If you would like to try working
+with Boson, download our [`faas`](https://github.com/boson-project/faas) CLI. If you
+don't already have an OpenShift instance with Serverless installed, or a Kubernetes
+cluster with Knative Serving and Eventing, you can follow our
+[Getting Started with Kubernetes Guide](https://github.com/boson-project/faas/blob/develop/docs/getting_started_kubernetes.md) to provision a cluster for function deployment.
 
 ## When will Boson Project be ready for general usage?
 There is not a fixed date at the moment for Boson Function availability, however
-we are hoping to provide a Developer Preview in late summer/early fall.
+we are hoping to provide a Developer Preview in the fall of 2020.
 
 ## Who is behind Boson Project?
 Boson Functions are a project from Red Hat.
