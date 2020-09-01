@@ -19,32 +19,31 @@ new function projects and deploy them to a Kubernetes cluster running both Servi
 and Eventing as a Knative `Service`. During the deployment process, the developer's
 function code is combined with a runtime framework (for example Quarkus or Node.js)
 and a platform proxy API (aka [`grid`](https://github.com/boson-project/grid)) using
-the CNCF buildpack APIs to create a runnable OCI container.
+the CNCF Buildpack APIs to create a runnable OCI container.
 
 ### Project Initialization and Deployment
 
 To create a new function project, a developer uses the CLI.
 
 ```sh
-faas init new.fn.dev --language nodejs
+faas create new.fn.example.com --runtime nodejs --registry docker.io/johndoe --trigger http -y
 ```
+Where `docker.io/johndoe` is needed to be replaced with a registry/repository name in which 
+developer has write access.
 
-This will create a new function project in `./www.fn.dev`. To deploy the function is
-also quite simple.
+This will create a new function project in the current directory and will instruct the CLI
+to use Docker and Buildpack APIs to create a runnable container image which is then deployed to Knative.  
 
-```sh
-faas deploy
-```
+For more information on `faas` CLI, please follow 
+[Function Developer's Guide](https://github.com/boson-project/faas/blob/develop/docs/developers_guide.md).
 
-This will instruct the CLI to use Docker and Buildpack APIs to create a runnable
-container image which can then be deployed to Knative.
 
 ![Boson Project Build](assets/init-build.png)
 
 Once the container image has been created, the CLI will deploy it as a Knative service
 on the cluster currently active in `~/.kube/config`. Also running in the image is the
 Boson `grid`. This service, has REST endpoints for platform-agnostic
-[Subscription](https://github.com/cloudevents/spec/blob/master/discovery.md) and
+[Subscription](https://github.com/cloudevents/spec/blob/master/subscriptions-api.md) and
 [Discovery](https://github.com/cloudevents/spec/blob/master/discovery.md) APIs, allowing
 the function to subscribe to event sources upon startup.
 
