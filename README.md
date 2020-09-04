@@ -139,9 +139,70 @@ don't already have an OpenShift instance with Serverless installed, or a Kuberne
 cluster with Knative Serving and Eventing, you can follow our
 [Getting Started with Kubernetes Guide](https://github.com/boson-project/faas/blob/develop/docs/getting_started_kubernetes.md) to provision a cluster for function deployment.
 
+## Who is behind Boson Project?
+Boson Functions are a project from Red Hat.
+
 ## When will Boson Project be ready for general usage?
 There is not a fixed date at the moment for Boson Function availability, however
 we are hoping to provide a Developer Preview in the fall of 2020.
 
+## How does this project relate to Knative ?
+
+Knative can be used as a target deployment for these functions
+
+## Can I build functions using this project and run it on any Kubernetes ?
+
 ## Who is behind Boson Project?
 Boson Functions are a project from Red Hat.
+
+## What are the application types and use cases/user stories for Boson Functions?
+There are varieties of application types and user stories that could be acheived using Functions.
+Even Driven is the pattern that is at heart of the Functions and any Event Driven architecture could benefit from it. 
+Some examples are:
+  - E-Commerce website:
+     - Function for Authentication that could show a personalized page.
+     - Function for cart management
+     - Function for payment management
+     - Function for Recommendation
+     - Cashless Payment System
+
+  - Media File Processing: 
+    - Change the format of Files
+    - Generating thumbnails version of images
+    - Uploading thumbnails version of images to profile/dashboard
+ 
+  - Data Transformation
+    - Adding metadata to existing data
+    - Combining data from another source
+    - Converting the format of the data
+    - Restructuring the data 
+    - Normalization of the data
+
+ - Scheduled Jobs
+ - ChatBot
+ - IoT backend
+ - notification based.
+ - Automation Tasks
+ - Machine Learning data analytics
+ - Stream processing
+
+
+//TODO
+## What events can trigger these functions?
+## What languages do these functions support?
+## Would I be able to write Stateful functions?
+## What restrictions would apply to the functions code?
+## How can I do logging in these distributed functions?
+## Would I be able to share code across my functions?
+## How would I monitor these functions?
+## How will I manage these functions?
+## Would I be able to access the infrastructure where these functions would run?
+## How would these functions secure my code?
+## Would I be able to use threads in these functions?
+## What are the best practices for working with Functions?
+## How does this project relate to KEDA ?
+## Can I build functions using this project and run on Azure Platform?
+## Can I build functions using this project and run on AWS?
+## How different this project is from Azure Functions?
+## How different this project is from AWS Lambda?
+
