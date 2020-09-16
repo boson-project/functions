@@ -130,21 +130,12 @@ Kubernetes cluster with Knative Serving and Eventing, you can follow our
 Or follow our instructions for setting up a [kind cluster]('kind-setup.md') on
 your local system.
 
-## Who is behind Boson Project?
-Boson Functions are a project from Red Hat.
-
 ## When will Boson Project be ready for general usage?
 There is not a fixed date at the moment for Boson Function availability, however
 we are hoping to provide a Developer Preview in the fall of 2020.
 
 ## How does this project relate to Knative ?
-
 Knative can be used as a target deployment for these functions
-
-## Can I build functions using this project and run it on any Kubernetes ?
-
-## Who is behind Boson Project?
-Boson Functions are a project from Red Hat.
 
 ## What are the application types and use cases/user stories for Boson Functions?
 There are varieties of application types and user stories that could be acheived using Functions.
@@ -174,14 +165,26 @@ Some examples are:
  - IoT backend
  - notification based.
  - Automation Tasks
+    - Content Creator
  - Machine Learning data analytics
  - Stream processing
 
+## Would I be able to write Stateful functions?
+Currently Boson Functions only offer Stateless functions but we would be adding Stateful Functions in the near future.
+
+## What languages/framework can I use to write my functions?
+Boson Functions provide buildpacks for Quarkus, Node.js and Go for now with plans for Python, Spring Boot, Rust in the near future.
+
+## What events can trigger/call these functions?
+Boson Functions offers support for HTTP event and [cloudevents](https://cloudevents.io/). 
+
+## Who is behind Boson Project?
+Boson Project are project from Red Hat that creates Functions based on Knative.
+
 
 //TODO
-## What events can trigger these functions?
-## What languages do these functions support?
-## Would I be able to write Stateful functions?
+
+## Does functions built using boson-project on any Kubernetes ? 
 ## What restrictions would apply to the functions code?
 ## How can I do logging in these distributed functions?
 ## Would I be able to share code across my functions?
