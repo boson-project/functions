@@ -119,6 +119,98 @@ function handleGet(context) {
 A Boson Function project may contain more than a single function. Howver, only the
 function exported from `index.js` will be invoked.
 
+### Other Examples
+
+<details>
+<summary>Quarkus Example</summary>
+  
+  ```java
+  package com.example;
+  
+  public class Functions {
+    // To expose the function just add `@Funq` annotation.
+    // The input/output type should be either primitive type or Java Bean.
+    @Funq
+    public String toLowerCase(String val) {
+        return val.toLowerCase();
+    }
+  }
+  ```
+  
+</details>
+
+<details>
+<summary>Go Raw HTTP Example</summary>
+  
+  ```go
+  package function
+
+  import (
+    "context"
+    "fmt"
+    "net/http"
+    "os"
+  )
+
+  // The function has to be named `Handle` and it has to be in the`function` package.
+  // Handle an HTTP Request.
+  // The `ctx` param is optional.
+  func Handle(ctx context.Context, res http.ResponseWriter, req *http.Request) {
+
+    res.Header().Add("Content-Type", "text/plain")
+    res.Header().Add("Content-Length", "3")
+    res.WriteHeader(200)
+
+    _, err := fmt.Fprintf(res, "OK\n")
+    if err != nil {
+      fmt.Fprintf(os.Stderr, "error or response write: %v", err)
+    }
+  }
+  ```
+  
+</details>
+
+<details>
+<summary>Go CloudEvent Example</summary>
+  
+  ```go
+  package function
+
+  import (
+    "context"
+    "fmt"
+    "os"
+
+    cloudevents "github.com/cloudevents/sdk-go/v2"
+  )
+
+  // The function has to be named `Handle` and it has to be in the`function` package.
+  // Handle a CloudEvent.
+  // Valid fn signatures are:
+  // * func()
+  // * func() error
+  // * func(context.Context)
+  // * func(context.Context) protocol.Result
+  // * func(event.Event)
+  // * func(event.Event) protocol.Result
+  // * func(context.Context, event.Event)
+  // * func(context.Context, event.Event) protocol.Result
+  // * func(event.Event) *event.Event
+  // * func(event.Event) (*event.Event, protocol.Result)
+  // * func(context.Context, event.Event) *event.Event
+  // * func(context.Context, event.Event) (*event.Event, protocol.Result)
+  func Handle(ctx context.Context, event cloudevents.Event) error {
+    if err := event.Validate(); err != nil {
+      fmt.Fprintf(os.Stderr, "invalid event received. %v", err)
+      return err
+    }
+    fmt.Printf("%v\n", event)
+    return nil
+  }
+  ```
+  
+</details>
+
 ## Can I run my functions on OpenShift?
 The Boson Project is designed to work both on OpenShift with the Serverless
 Operator installed, or Kubernetes with Knative.
