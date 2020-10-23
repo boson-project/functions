@@ -8,9 +8,9 @@ editing, and deploying a Boson Function project.
 In order to follow along with this tutorial, you will need to have a few tools
 installed.
 
-* [oc](oc) or [kubectl](kubectl) CLI
-* [kn](kn) CLI
-* [Docker](docker) 
+* [oc][oc] or [kubectl][kubectl] CLI
+* [kn][kn] CLI
+* [Docker][docker] 
 
 [docker]: https://docs.docker.com/install/
 [oc]: https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html#cli-installing-cli_cli-developer-commands
@@ -183,17 +183,9 @@ HTTP requests.
 
 ### `faas deploy`
 
-To deploy the image to your cluster, use the `deploy` command.
+To deploy the image to your cluster, use the `deploy` command. You can also use
+this command to update a Function deployment after making changes locally.
 
 ```bash
 faas deploy
-```
-
-### `faas update`
-
-After editing the function source code and testing locally, you'll want to be
-able to redeploy the function. To do so, use the `update` command.
-
-```bash
-faas update
 ```
