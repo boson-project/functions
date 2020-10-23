@@ -7,11 +7,18 @@ simple HTTP functions.
 
 This repository is a directory of information and resources for the project.
 
+## Quick links
+
+* [Frequently asked questions](FAQ.md)
+* [Tutorial](tutorial.md)
+* [Kind cluster setup](kind-setup.md)
+* [CLI Download](https://boson-project/faas/releases)
+
 ## Using Boson Functions
 
 To get started using Boson Functions follow the
 [step by step tutorial](tutorial.md). For OpenShift Serverless Functions Test
-Day, please follow the [Test Day Guide](testing.md)
+Day, please follow the [Test Day Guide](testing.md).
 
 ### Feedback
 
@@ -27,13 +34,14 @@ The major components of the Boson Project are:
   [runtime templates](https://github.com/boson-project/faas/tree/main/templates)
   for Go, Node.js and Quarkus. The runtime is responsible for managing incoming
   CloudEvents or HTTP connections, and invoking the user function.
-* Buildpacks for Go, Node.js and Quarkus. The buildpacks are based on the CNCF
-  Buildpack specification and automate the process of converting a user's
-  function from source code into a runnable OCI image.
-* A CLI for initializing, creating and deploying functions as a Knative Service.
-  The CLI may be run standalone in vanilla Kubernetes environments, and it is
-  also available as a compiled plugin for `kn` in the OpenShift Serverless
-  Functions product.
+* [Buildpacks](https://github.com/boson-project/buildpacks) for Go, Node.js and
+  Quarkus. The buildpacks are based on the CNCF Buildpack specification and
+  automate the process of converting a user's function from source code into a
+  runnable OCI image.
+* A [CLI](https://github.com/boson-project/faas) for initializing, creating and
+  deploying functions as a Knative Service. The CLI may be run standalone in
+  vanilla Kubernetes environments, and it is also available as a compiled plugin
+  for `kn` in the OpenShift Serverless Functions product.
 * A Kubernetes cluster with Knative Serving and Eventing installed
 
 ## Provisioning a Cluster
