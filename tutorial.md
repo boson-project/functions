@@ -13,7 +13,7 @@ installed.
 * [Docker][docker] 
 
 [docker]: https://docs.docker.com/install/
-[oc]: https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html#cli-installing-cli_cli-developer-commands
+[oc]: https://docs.openshift.com/container-platform/4.6/cli_reference/openshift_cli/getting-started-cli.html#cli-installing-cli_cli-developer-commands
 [kubectl]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [kn]: https://knative.dev/docs/install/install-kn/
 

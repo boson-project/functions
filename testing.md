@@ -27,9 +27,10 @@ faas init -l node -t events
 In order to use the CLI, the following prerequisites must be met.
 
 * You must have access to a Kubernetes cluster with Knative Serving and Eventing
-  installed. Ideally, this should be an instance of OpenShift version 4.6.x. It
-  is beyond the scope of this document to document enabling Knative Serving and
-  Eventing in a given Kubernetes `namespace`. Please see the
+  installed. Ideally, this should be an instance of OpenShift version 4.6.x. The
+  easiest way to do this is to use `clusterbot` on Slack. It is beyond the scope
+  of this document to document enabling Knative Serving and Eventing in a given
+  Kubernetes `namespace`. Please see the
   [OpenShift documentation](https://srvke-486--ocpdocs.netlify.app/openshift-enterprise/latest/serverless/installing_serverless/installing-openshift-serverless.html)
   for additional resources.
 * You must have access to an image registry such as docker.io. Function project
@@ -39,4 +40,3 @@ In order to use the CLI, the following prerequisites must be met.
 * You must have a Docker API compatible daemon running on your local system. See
   the Docker ["Get Started"](https://www.docker.com/get-started) guide if you
   need additional help.
-  
