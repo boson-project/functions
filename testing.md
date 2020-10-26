@@ -4,7 +4,7 @@ The CLI may be used either as a plugin for `kn`, as distributed in OpenShift
 Serverless Functions, or on its own by downloading a binary for either Linux,
 OSX or Windows from the
 [project repository](https://github.com/boson-project/faas/releases/). For Test
-Day, please use the `kn` binary provided with OpenShift 4.6.x. This document is
+Day, please use the `kn` binary created by Warren. This document is
 written assuming that you are using the `kn` CLI with Functions capabilities as
 provided by OpenShift Serverless. To follow along in this document using the
 `boson-project/faas` distribution, simply execute the commands _without_ the
@@ -59,10 +59,11 @@ your project using the `-l` flag.
 #### Steps
 
 1. Initialize the function project using the `kn` CLI
-1. Build the function using the `kn` CLI
-1. Run the function locally
+   (`kn faas init -l <node|quarkus>`)
+1. Build the function using the `kn` CLI (`kn faas build`)
+1. Run the function locally (`kn faas run`)
 1. Visit http://localhost:8080 to ensure the function is working
-1. Deploy the function to OpenShift using the `kn` CLI
+1. Deploy the function to OpenShift using the `kn` CLI (`kn faas deploy`)
 
 #### Validation
 
