@@ -4,13 +4,14 @@ The CLI may be used either as a plugin for `kn`, as distributed in OpenShift
 Serverless Functions, or on its own by downloading a binary for either Linux,
 OSX or Windows from the
 [project repository](https://github.com/boson-project/faas/releases/). For Test
-Day, please use the `kn` binary created by Warren. This document is
-written assuming that you are using the `kn` CLI with Functions capabilities as
-provided by OpenShift Serverless. To follow along in this document using the
-`boson-project/faas` distribution, simply execute the commands _without_ the
-preceding `kn`. For example the following command which initializes a new
-Node.js Function project that responds to CloudEvents looks almost exactly the
-same.
+Day, please use the `kn` binary that was recently
+[created by Warren](http://download.eng.bos.redhat.com/staging-cds/developer/openshift-serverless-clients/0.17.2-1/signed/).
+This document is written assuming that you are using the `kn` CLI with Functions
+capabilities as provided by OpenShift Serverless. To follow along in this
+document using the `boson-project/faas` distribution, simply execute the
+commands _without_ the preceding `kn`. For example the following command which
+initializes a new Node.js Function project that responds to CloudEvents looks
+almost exactly the same.
 
 ***OpenShift Serverless Functions***
 ```
