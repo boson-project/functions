@@ -40,3 +40,31 @@ In order to use the CLI, the following prerequisites must be met.
 * You must have a Docker API compatible daemon running on your local system. See
   the Docker ["Get Started"](https://www.docker.com/get-started) guide if you
   need additional help.
+
+## Scenarios
+
+Please try to complete each of the following scenarios, noting where you ran
+into trouble (if at all). In most cases, the step by step commands are not
+listed because we would like to understand how easy it is to get started with
+Serverless Functions by simply using the CLI and reading the help text.
+
+
+### Create a function that responds to HTTP and deploy it
+
+The first scenario should get you comfortable with creating a Function project
+and deploying it to an OpenShift cluster. Using the `kn` CLI, create a new
+project with `faas init`. You can choose between Node.js, Quarkus and Go for
+your project using the `-l` flag.
+
+#### Steps
+
+1. Initialize the function project using the `kn` CLI
+1. Build the function using the `kn` CLI
+1. Run the function locally
+1. Visit http://localhost:8080 to ensure the function is working
+1. Deploy the function to OpenShift using the `kn` CLI
+
+#### Validation
+
+Once the function has been deployed, obtain the URL using the `kn service list`
+and visit the function in your browser. Ensure there are no errors.
