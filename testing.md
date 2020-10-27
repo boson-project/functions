@@ -80,6 +80,53 @@ and visit the function in your browser. Ensure there are no errors.
 When you have finished this scenario, you can remove the deployed function using
 `kn faas delete` from the Function project directory.
 
+### Edit a function locally with live reload
+
+#### Steps
+
+#### Validation
+
+#### Cleanup
+
+### Add tests to a function project
+
+#### Steps
+
+#### Validation
+
+#### Cleanup
+
+### Update a deployed function
+
+#### Steps
+
+#### Validation
+
+#### Cleanup
+
+### Add an external dependency to a function
+
+#### Steps
+
+#### Validation
+
+#### Cleanup
+
+### List deployed functions
+
+#### Steps
+
+#### Validation
+
+#### Cleanup
+
+### Check liveness and readiness paths for a function
+
+#### Steps
+
+#### Validation
+
+#### Cleanup
 
 ### Create a function that responds to CloudEvents and deploy it
 
