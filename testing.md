@@ -50,12 +50,11 @@ listed because we would like to understand how easy it is to get started with
 Serverless Functions by simply using the CLI and reading the help text.
 
 
-### Create a function that responds to HTTP and deploy it
+### Create a function that responds to HTTP
 
-The first scenario should get you comfortable with creating a Function project
-and deploying it to an OpenShift cluster. Using the `kn` CLI, create a new
-project with `kn faas init`. You can choose between Node.js, Quarkus and Go for
-your project using the `-l` flag.
+The first scenario should get you comfortable with creating a Function project.
+Using the `kn` CLI, create a new project with `kn faas init`. You can choose
+between Node.js, Quarkus and Go for your project using the `-l` flag.
 
 For more details on the `faas init` command, check the
 [documentation](https://github.com/boson-project/faas/blob/main/docs/commands.md#init)
@@ -63,22 +62,54 @@ or try `kn faas help init`.
 
 #### Steps
 
-1. Initialize the function project using the `kn` CLI
-   (`kn faas init -l <node|quarkus>`)
-1. Build the function using the `kn` CLI (`kn faas build`)
-1. Run the function locally (`kn faas run`)
-1. Visit http://localhost:8080 to ensure the function is working
-1. Deploy the function to OpenShift using the `kn` CLI (`kn faas deploy`)
+1. Create a project directory and `cd` into it.
+   ```
+   mkdir myfunc
+   cd myfunc
+   ```
+1. Initialize the function project using the `kn` CLI.
+   ```
+   kn faas init -l <node|quarkus>
+   ```
 
 #### Validation
 
-Once the function has been deployed, obtain the URL using the `kn service list`
-and visit the function in your browser. Ensure there are no errors.
+After you have created the project, examine the contents of the project
+directory. There should be typical project files for the kind of project you
+created. For example, a `package.json` and `index.js` file for a Node.js
+project. There will also be a `faas.yaml` file containing metadata about
+the project.
 
-#### Clean up
+You should be able to use local tooling to build and run the project.
 
-When you have finished this scenario, you can remove the deployed function using
-`kn faas delete` from the Function project directory.
+### Build a Function project
+
+In this scenario, you will build your Function project on the local system.
+You will need to have a Docker daemon running on your local computer. Building
+a Function project results in an OCI container image.
+
+#### Steps
+
+1. Initialize a Function project or re-use an existing project from the first
+   scenario.
+1. Build the project
+   ```
+   faas build
+   ```
+1. Provide a container registry location where you have permission to create
+   images. This will typically be, for example, a personal Docker Hub or Quay.io
+   account. You will be prompted for this value.  
+   ```
+   docker.io/<your username>
+   ```
+
+#### Validation
+
+You can check for the image locally using the `docker` CLI.
+
+```
+docker image ls (grep image: faas.yaml | cut -d/ -f2-3)
+```
 
 ### Edit a function locally with live reload
 
