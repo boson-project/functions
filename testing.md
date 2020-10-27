@@ -54,8 +54,12 @@ Serverless Functions by simply using the CLI and reading the help text.
 
 The first scenario should get you comfortable with creating a Function project
 and deploying it to an OpenShift cluster. Using the `kn` CLI, create a new
-project with `faas init`. You can choose between Node.js, Quarkus and Go for
+project with `kn faas init`. You can choose between Node.js, Quarkus and Go for
 your project using the `-l` flag.
+
+For more details on the `faas init` command, check the
+[documentation](https://github.com/boson-project/faas/blob/main/docs/commands.md#init)
+or try `kn faas help init`.
 
 #### Steps
 
@@ -70,3 +74,60 @@ your project using the `-l` flag.
 
 Once the function has been deployed, obtain the URL using the `kn service list`
 and visit the function in your browser. Ensure there are no errors.
+
+#### Clean up
+
+When you have finished this scenario, you can remove the deployed function using
+`kn faas delete` from the Function project directory.
+
+
+### Create a function that responds to CloudEvents and deploy it
+
+This scenario is different than the one above in that you will now create a
+Function project that can receive and respond with CloudEvents. To create a new
+project that can respond to events, use the `-t` flag. For example,
+`kn faas init -l node -t events` will create a new Function project in Node.js
+that can respond to CloudEvents. You can choose between Node.js, Quarkus and Go
+for your project using the `-l` flag.
+
+For more details on the `faas init` command, check the
+[documentation](https://github.com/boson-project/faas/blob/main/docs/commands.md#init)
+or try `kn faas help init`.
+
+#### Steps
+
+1. Initialize the function project using the `kn` CLI
+   (`kn faas init -l <node|quarkus> -t events`)
+1. Build the function using the `kn` CLI (`kn faas build`)
+1. Run the function locally (`kn faas run`)
+1. Visit http://localhost:8080 to ensure the function is working
+1. Deploy the function to OpenShift using the `kn` CLI (`kn faas deploy`)
+
+#### Validation
+
+Once the function has been deployed, obtain the URL using the `kn service list`
+and visit the function in your browser. Ensure there are no errors.
+
+#### Clean up
+
+When you have finished this scenario, you can remove the deployed function using
+`kn faas delete` from the Function project directory. You may also choose to
+keep this deployment around for some of the next scenarios.
+
+### Connect a Knative event source to a deployed function
+
+For this scenario, you will need to have a Function that responds to CloudEvents
+already deployed. You may follow the previous scenario to achieve this if you
+have not already. You will be connecting a Knative event source to your deployed
+function using the Dev Console.
+
+
+#### Steps
+
+
+#### Validation
+
+
+#### Clean up
+
+
