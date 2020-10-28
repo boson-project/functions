@@ -43,7 +43,8 @@ In order to use the CLI, the following prerequisites must be met.
   need additional help.
 * Finally, the namespace you are using must have the Knative default broker and
   an event source. If these are not already there (you can check the Topology
-  screen from the Developer perspective), use the following commands.
+  screen from the Developer perspective), use the following commands, or download
+  a [small script](setup-namespace.sh) to run locally that will do this for you.
   ```
   oc new-project <yournamespace>
   oc label namespace <yournamespace> eventing.knative.dev/injection=enabled
