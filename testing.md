@@ -81,6 +81,8 @@ the project.
 
 You should be able to use local tooling to build and run the project.
 
+---
+
 ### Run a Function project on your local system
 
 In this scneario, you will run your Function project locally, installing
@@ -119,6 +121,8 @@ curl -v ${URL} \
   -d "{\"name\": \"$(whoami)\"}\""
 ```
 
+---
+
 ### Test a Function project locally
 
 In this scenario, you will run the provided tests for your Function project. The
@@ -146,6 +150,8 @@ will first need to install some dependencies.
 #### Validation
 
 The tests should complete without failure, error messages or warnings.
+
+---
 
 ### Build a Function project
 
@@ -176,6 +182,8 @@ You can check for the image locally using the `docker` CLI.
 docker image ls (grep image: faas.yaml | cut -d/ -f2-3)
 ```
 
+---
+
 ### Edit a function locally with live reload
 
 #### Steps
@@ -183,6 +191,8 @@ docker image ls (grep image: faas.yaml | cut -d/ -f2-3)
 #### Validation
 
 #### Cleanup
+
+---
 
 ### Create a function that responds to CloudEvents and deploy it
 
@@ -235,6 +245,8 @@ When you have finished this scenario, you can remove the deployed function using
 `kn faas delete` from the Function project directory. You may also choose to
 keep this deployment around for some of the next scenarios.
 
+---
+
 ### Modify and update a deployed function
 
 In this scenario you will updat an already deployed function. If you do not
@@ -258,6 +270,8 @@ Using `kn service list` obtain the URL for your service and invoke it using the
 `curl` command in the previous scenario. Ensure that the changes you made were
 applied
 
+---
+
 ### List deployed functions
 
 Now that you have one or more Function projects deployed, you can list the
@@ -275,6 +289,8 @@ deployed Functions using the `kn` CLI.
 You should see all of your deployed functions listed. Other functions that you
 may have created but not yet deployed should not be listed.
 
+---
+
 ### Check liveness and readiness paths for a function
 
 All Function projects expose liveness and readiness URLs for the deployed Service.
@@ -288,13 +304,14 @@ Ensure that these are active by visiting them in your browser.
    ```
    kn service list
    ```
+
+#### Validation
+
 1. Browse to the URL returned with the following paths appended:
    `/health/readiness` and `/health/liveness`. They should respond with
    `200 OK`.
 
-#### Validation
-
-#### Cleanup
+---
 
 ### Connect a Knative event source to a deployed function
 
