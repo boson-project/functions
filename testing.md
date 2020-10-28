@@ -49,16 +49,15 @@ into trouble (if at all). In most cases, the step by step commands are not
 listed because we would like to understand how easy it is to get started with
 Serverless Functions by simply using the CLI and reading the help text.
 
+For more details on the CLI commands, check the
+[documentation](https://github.com/boson-project/faas/blob/main/docs/commands.md#init)
+or try `kn faas help init`.
 
 ### Create a function that responds to HTTP
 
 The first scenario should get you comfortable with creating a Function project.
 Using the `kn` CLI, create a new project with `kn faas init`. You can choose
 between Node.js, Quarkus and Go for your project using the `-l` flag.
-
-For more details on the `faas init` command, check the
-[documentation](https://github.com/boson-project/faas/blob/main/docs/commands.md#init)
-or try `kn faas help init`.
 
 #### Steps
 
@@ -82,11 +81,77 @@ the project.
 
 You should be able to use local tooling to build and run the project.
 
+### Run a Function project on your local system
+
+In this scneario, you will run your Function project locally, installing
+dependencies and listening on local network ports. You should be sure that you
+don't have anything else currently listening to port 8080, and that you already
+have the necessary developer tooling for the runtime you are using. For example,
+a Node.js Function will require Node.js version 12 or greater, along with npm. A
+Quarkus Function project will require Maven and a JDK.
+
+#### Steps
+
+1. Initialize a Function project or re-use an existing project from the first
+   scenario.
+1. (Node.js) Start the project
+   ```
+   npm run local
+   ```
+1. (Quarkus) Start the project
+   ```
+   ./mvnw quarkus:dev
+   ```
+
+#### Validation
+
+**Node.js:** To validate this scenario, browse to http://localhost:8080. You should see the
+server accept your request in the server logs, and the browser should display
+some non-error text. 
+
+**Quarkus** For a Quarkus function, you must send an HTTP POST request to the
+function at the URL http://localhost:8080/echo.
+
+```
+URL=http://localhost:8080/echo
+curl -v ${URL} \
+  -H "Content-Type:application/json" \
+  -d "{\"name\": \"$(whoami)\"}\""
+```
+
+### Test a Function project locally
+
+In this scenario, you will run the provided tests for your Function project. The
+templates include a small number of tests to help you get started writing your
+own. As a first step, run the existing tests. For Node.js Function projects you
+will first need to install some dependencies.
+
+#### Steps
+
+1. Initialize a Function project or re-use an existing project from the first
+   scenario.
+1. (Node) Install dependencies
+   ```
+   npm install
+   ```
+1. (Node) Run the tests
+   ```
+   npm test
+   ```
+1. (Quarkus) Run the tests
+   ```
+   ./mvnw test
+   ```
+
+#### Validation
+
+The tests should complete without failure, error messages or warnings.
+
 ### Build a Function project
 
-In this scenario, you will build your Function project on the local system.
-You will need to have a Docker daemon running on your local computer. Building
-a Function project results in an OCI container image.
+In this scenario, you will build your Function project as an OCI container image
+which may eventually be deployed into a Kubernetes/OpenShift cluster. You will
+need to have a Docker daemon running on your local computer.
 
 #### Steps
 
@@ -119,78 +184,117 @@ docker image ls (grep image: faas.yaml | cut -d/ -f2-3)
 
 #### Cleanup
 
-### Add tests to a function project
-
-#### Steps
-
-#### Validation
-
-#### Cleanup
-
-### Update a deployed function
-
-#### Steps
-
-#### Validation
-
-#### Cleanup
-
-### Add an external dependency to a function
-
-#### Steps
-
-#### Validation
-
-#### Cleanup
-
-### List deployed functions
-
-#### Steps
-
-#### Validation
-
-#### Cleanup
-
-### Check liveness and readiness paths for a function
-
-#### Steps
-
-#### Validation
-
-#### Cleanup
-
 ### Create a function that responds to CloudEvents and deploy it
 
 This scenario is different than the one above in that you will now create a
 Function project that can receive and respond with CloudEvents. To create a new
 project that can respond to events, use the `-t` flag. For example,
 `kn faas init -l node -t events` will create a new Function project in Node.js
-that can respond to CloudEvents. You can choose between Node.js, Quarkus and Go
-for your project using the `-l` flag.
-
-For more details on the `faas init` command, check the
-[documentation](https://github.com/boson-project/faas/blob/main/docs/commands.md#init)
-or try `kn faas help init`.
+that can respond to CloudEvents. You can choose between Node.js and Quarkus for
+your project using the `-l` flag.
 
 #### Steps
 
-1. Initialize the function project using the `kn` CLI
-   (`kn faas init -l <node|quarkus> -t events`)
-1. Build the function using the `kn` CLI (`kn faas build`)
-1. Run the function locally (`kn faas run`)
-1. Visit http://localhost:8080 to ensure the function is working
-1. Deploy the function to OpenShift using the `kn` CLI (`kn faas deploy`)
+1. Initialize the function project using the `kn` CLI.
+   ```
+   kn faas init -l <node|quarkus> -t events
+   ```
+1. Build the function using the `kn` CLI.
+   ```
+   kn faas build
+   ```
+1. Run the function locally using the `kn` CLI.
+   ```
+   kn faas run
+   ```
+1. Deploy the function to OpenShift using the `kn` CLI.
+   ```
+   kn faas deploy
+   ```
 
 #### Validation
 
-Once the function has been deployed, obtain the URL using the `kn service list`
-and visit the function in your browser. Ensure there are no errors.
+Once the function has been deployed, check it's status with `kn service list`.
+You should see no errors. Get the URL for the Knative Service from the output
+and send a request using `curl`.
+
+```
+export URL=<URL from kn service list>
+curl -X POST -d '{"name": "Tiger", "customerId": "0123456789"}' \
+  -H'Content-type: application/json' \
+  -H'Ce-id: 1' \
+  -H'Ce-source: cloud-event-example' \
+  -H'Ce-type: dev.knative.example' \
+  -H'Ce-specversion: 1.0' \
+  $URL
+```
 
 #### Clean up
 
 When you have finished this scenario, you can remove the deployed function using
 `kn faas delete` from the Function project directory. You may also choose to
 keep this deployment around for some of the next scenarios.
+
+### Modify and update a deployed function
+
+In this scenario you will updat an already deployed function. If you do not
+already have a function deployed to a cluster, please follow the immediately
+preceding scenario to do so.
+
+#### Steps
+
+1. Modify the Function project locally. You can choose to make code changes,
+   add a dependency, or any other kind of change you would typically make to 
+   a project.
+1. Deploy the updates to the cluster using the `kn` CLI. This will build a new
+   container image and update your previously deployed function.
+   ```
+   faas deploy
+   ```
+
+#### Validation
+
+Using `kn service list` obtain the URL for your service and invoke it using the
+`curl` command in the previous scenario. Ensure that the changes you made were
+applied
+
+### List deployed functions
+
+Now that you have one or more Function projects deployed, you can list the
+deployed Functions using the `kn` CLI.
+
+#### Steps
+
+1. List the deployed functions with `kn`
+   ```
+   kn faas list
+   ```
+
+#### Validation
+
+You should see all of your deployed functions listed. Other functions that you
+may have created but not yet deployed should not be listed.
+
+### Check liveness and readiness paths for a function
+
+All Function projects expose liveness and readiness URLs for the deployed Service.
+Ensure that these are active by visiting them in your browser.
+
+#### Steps
+
+1. Ensure that you already have a Function project deployed from one of the
+   previous scenarios
+1. Obtain the URL for the deployed Function using the `kn` CLI
+   ```
+   kn service list
+   ```
+1. Browse to the URL returned with the following paths appended:
+   `/health/readiness` and `/health/liveness`. They should respond with
+   `200 OK`.
+
+#### Validation
+
+#### Cleanup
 
 ### Connect a Knative event source to a deployed function
 
