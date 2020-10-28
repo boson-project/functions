@@ -41,6 +41,13 @@ In order to use the CLI, the following prerequisites must be met.
 * You must have a Docker API compatible daemon running on your local system. See
   the Docker ["Get Started"](https://www.docker.com/get-started) guide if you
   need additional help.
+* Finally, the namespace you are using must have the Knative default broker and
+  an event source. If these are not already there (you can check the Topology
+  screen from the Developer perspective), use the following commands.
+  ```
+  oc label namespace <yournamespace> eventing.knative.dev/injection=enabled
+  kn source ping create my-ping --schedule "* * * * *" --data '{ "name": "PingSource" }' --sink broker:default
+  ```
 
 ## Scenarios
 
