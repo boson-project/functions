@@ -45,9 +45,7 @@ In order to use the CLI, the following prerequisites must be met.
 ## Scenarios
 
 Please try to complete each of the following scenarios, noting where you ran
-into trouble (if at all). In most cases, the step by step commands are not
-listed because we would like to understand how easy it is to get started with
-Serverless Functions by simply using the CLI and reading the help text.
+into trouble (if at all).
 
 For more details on the CLI commands, check the
 [documentation](https://github.com/boson-project/faas/blob/main/docs/commands.md#init)
