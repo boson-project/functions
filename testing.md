@@ -327,13 +327,16 @@ already deployed. You may follow the previous scenario to achieve this if you
 have not already. You will be connecting a Knative event source to your deployed
 function using the Dev Console.
 
-
 #### Steps
 
+1. Open the Dev Console and navigate to the Developer Topology view
+1. There should already be a PingSource event emitter in your Topology
+1. Use click the small blue arrow that appears on the PingSource when you hover
+   over it, and drag it to your Function service.
 
 #### Validation
 
-
-#### Clean up
+1. In the Dev Console, examine the logs of your Function service. You should see
+   data from the PingSource once per minute appear in the logs.
 
 
