@@ -45,6 +45,7 @@ In order to use the CLI, the following prerequisites must be met.
   an event source. If these are not already there (you can check the Topology
   screen from the Developer perspective), use the following commands.
   ```
+  oc new-project <yournamespace>
   oc label namespace <yournamespace> eventing.knative.dev/injection=enabled
   kn source ping create my-ping --schedule "* * * * *" --data '{ "name": "PingSource" }' --sink broker:default
   ```
