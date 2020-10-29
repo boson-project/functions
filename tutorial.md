@@ -39,7 +39,7 @@ within your `$PATH`.
 curl -L -o - faas.gz https://github.com/boson-project/faas/releases/download/v0.8.0/faas_linux_amd64.gz | gunzip > faas && chmod 755 faas
 sudo mv faas /usr/local/bin
 ```
-## Configuring a Container Repository
+## Configuring a Container Registry
 
 The unit of deployment in Boson Functions is an [OCI](https://opencontainers.org/)
 container image, typically referred to as a Docker container image.
@@ -50,19 +50,19 @@ logged in to a container registry. For example, `docker.io/lanceball`
 
 ```bash
 # Typically, this will log you in to docker hub if you
-# omit <repository.url>. If you are using a repository
-# other than Docker hub, provide that for <repository.url>
-docker login -u lanceball -p [redacted] <repository.url>
+# omit <registry.url>. If you are using a registry
+# other than Docker hub, provide that for <registry.url>
+docker login -u lanceball -p [redacted] <registry.url>
 ```
 
-> Note: many of the `faas` CLI commands take a `--repository` argument.
-> Set the `FAAS_REPOSITORY` environment variable in order to omit this
+> Note: many of the `faas` CLI commands take a `--registry` argument.
+> Set the `FAAS_REGISTRY` environment variable in order to omit this
 > parameter when using the CLI.
 
 ```bash
-# This should be set to a repository that you have write permission
+# This should be set to a registry that you have write permission
 # on and you have logged into in the previous step.
-export FAAS_REPOSITORY=docker.io/lanceball
+export FAAS_REGISTRY=docker.io/lanceball
 ```
 
 ## Creating a Project
@@ -87,7 +87,7 @@ faas create -l node
 ```
 
 This will create a Node.js Function project in the current directory accepting
-all of the defaults inferred from your environment, for example`$FAAS_REPOSITORY`.
+all of the defaults inferred from your environment, for example`$FAAS_REGISTRY`.
 When the command has completed, you can see the deployed function.
 
 ```bash

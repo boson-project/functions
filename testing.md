@@ -176,9 +176,14 @@ need to have a Docker daemon running on your local computer.
    ```
 3. Provide a container registry location where you have permission to create
    images. This will typically be, for example, a personal Docker Hub or Quay.io
-   account. You will be prompted for this value.  
+   account. You will be prompted for this value or you can set it via
+   `FAAS_REGISTRY` environment variable.
    ```
    docker.io/<your username>
+   ```
+   or
+   ```
+   export FAAS_REGISTRY=docker.io/<your username>
    ```
 4. -Optional- Try jvm and native buiild for Quarkus 
    ```
