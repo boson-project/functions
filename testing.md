@@ -170,16 +170,24 @@ need to have a Docker daemon running on your local computer.
 
 1. Initialize a Function project or re-use an existing project from the first
    scenario.
-1. Build the project
+2. Build the project
    ```
-   faas build
+   kn faas build
    ```
-1. Provide a container registry location where you have permission to create
+3. Provide a container registry location where you have permission to create
    images. This will typically be, for example, a personal Docker Hub or Quay.io
    account. You will be prompted for this value.  
    ```
    docker.io/<your username>
    ```
+4. -Optional- Try jvm and native buiild for Quarkus 
+   ```
+   kn faas build --builder native 
+   ```
+   ```
+   kn faas build --builder jvm
+   ```
+
 
 #### Validation
 
@@ -200,6 +208,34 @@ docker image ls (grep image: faas.yaml | cut -d/ -f2-3)
 #### Cleanup
 
 ---
+
+---
+### Deploy the function to the OpenShift Cluster
+
+#### Steps
+1. Make sure you are logged onto the OpenShift Cluster from your local machine.
+2. Initialize and build a new image for Functions or reuse the previously created function image. ( If you are using quay.io, make sure the repo is public before attempting this step)
+3. Use the CLI to deploy the function as a knative service on the OpenShift Cluster. 
+```
+kn faas deploy
+```
+
+#### Validation
+Use the following command to confirm the deployed functions. 
+ ```
+ kn faas list
+ ```
+ OR 
+ ```
+ kn service list
+ ```
+
+You can also see it on the Dev Console
+
+#### Cleanup
+When you have finished this scenario, you can remove the deployed function using
+`kn faas delete` from the Function project directory. You may also choose to
+keep this deployment around for some of the next scenarios.
 
 ### Create a function that responds to CloudEvents and deploy it
 
