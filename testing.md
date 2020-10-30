@@ -47,8 +47,8 @@ In order to use the CLI, the following prerequisites must be met.
   a [small script](namespace-setup.sh) to run locally that will do this for you.
   ```
   oc new-project <yournamespace>
-  oc label namespace <yournamespace> eventing.knative.dev/injection=enabled
-  kn source ping create my-ping --schedule "* * * * *" --data '{ "name": "PingSource" }' --sink broker:default
+  kn broker create default
+  kn source ping create my-ping --data '{ "name": "PingSource" }' --sink broker:default
   ```
 
 ## Scenarios
