@@ -64,7 +64,7 @@ POST request comprised of a `CloudEvent`.
 ## What is the tooling and architecture for the Boson Project?
 
 The primary tooling used by a function developer is the
-[`func` CLI](https://github.com/boson-project/faas). Developers use this CLI to
+[`func` CLI](https://github.com/boson-project/func). Developers use this CLI to
 create new function projects and deploy them to a Kubernetes cluster running
 Knative Serving and Eventing. During deployment, the developer's function code
 is combined with a runtime framework (for example Quarkus or Node.js) and a
@@ -77,7 +77,7 @@ the CNCF Buildpack APIs to create a runnable OCI container.
 Boson Functions are simply that - functions. They are written in either Go,
 Node.js or Java/Quarkus. The Boson `func` CLI can create a Boson Function
 project using a
-[template](https://github.com/boson-project/faas/tree/develop/templates) which
+[template](https://github.com/boson-project/func/tree/main/templates) which
 provides the overall structure for your function. Here is a simple example
 function, written in Node.js.
 
@@ -236,7 +236,7 @@ Operator installed, or Kubernetes with Knative Serving and Eventing.
 A Developer Preview for OpenShift Serverless customers will be available in
 early to mid November. For vanilla Kubernetes/Knative the most recent version of
 the CLI can be obtained on our
-[releases page](https://github.com/boson-project/faas/releases/).
+[releases page](https://github.com/boson-project/func/releases/).
 
 ## How does this project relate to Knative?
 

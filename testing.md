@@ -3,12 +3,12 @@
 The CLI may be used either as a plugin for `kn`, as distributed in OpenShift
 Serverless Functions, or on its own by downloading a binary for either Linux,
 OSX or Windows from the
-[project repository](https://github.com/boson-project/faas/releases/). For Test
+[project repository](https://github.com/boson-project/func/releases/). For Test
 Day, please use the `kn` binary that was recently
 [created by Warren](http://download.eng.bos.redhat.com/staging-cds/developer/openshift-serverless-clients/0.17.2-1/signed/).
 This document is written assuming that you are using the `kn` CLI with Functions
 capabilities as provided by OpenShift Serverless. To follow along in this
-document using the `boson-project/faas` distribution, simply execute the
+document using the `boson-project/func` distribution, simply execute the
 commands _without_ the preceding `kn`. For example the following command which
 creates a new Node.js Function project that responds to CloudEvents looks
 almost exactly the same.
@@ -57,7 +57,7 @@ Please try to complete each of the following scenarios, noting where you ran
 into trouble (if at all).
 
 For more details on the CLI commands, check the
-[documentation](https://github.com/boson-project/faas/blob/main/docs/commands.md#create)
+[documentation](https://github.com/boson-project/func/blob/main/docs/commands.md#create)
 or try `kn func help create`.
 
 ### Create a function that responds to HTTP
