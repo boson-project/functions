@@ -15,12 +15,12 @@ almost exactly the same.
 
 ***OpenShift Serverless Functions***
 ```
-kn faas create -l node -t events
+kn func create -l node -t events
 ```
 
 ***Boson Project***
 ```
-faas create -l node -t events
+func create -l node -t events
 ```
 
 ## Prerequisites
@@ -58,12 +58,12 @@ into trouble (if at all).
 
 For more details on the CLI commands, check the
 [documentation](https://github.com/boson-project/faas/blob/main/docs/commands.md#create)
-or try `kn faas help create`.
+or try `kn func help create`.
 
 ### Create a function that responds to HTTP
 
 The first scenario should get you comfortable with creating a Function project.
-Using the `kn` CLI, create a new project with `kn faas create`. You can choose
+Using the `kn` CLI, create a new project with `kn func create`. You can choose
 between Node.js, Quarkus and Go for your project using the `-l` flag.
 
 #### Steps
@@ -75,7 +75,7 @@ between Node.js, Quarkus and Go for your project using the `-l` flag.
    ```
 1. Create the function project using the `kn` CLI.
    ```
-   kn faas create -l <node|quarkus>
+   kn func create -l <node|quarkus>
    ```
 
 #### Validation
@@ -83,7 +83,7 @@ between Node.js, Quarkus and Go for your project using the `-l` flag.
 After you have created the project, examine the contents of the project
 directory. There should be typical project files for the kind of project you
 created. For example, a `package.json` and `index.js` file for a Node.js
-project. There will also be a `faas.yaml` file containing metadata about
+project. There will also be a `func.yaml` file containing metadata about
 the project.
 
 You should be able to use local tooling to build and run the project.
@@ -172,25 +172,25 @@ need to have a Docker daemon running on your local computer.
    scenario.
 2. Build the project
    ```
-   kn faas create
+   kn func build
    ```
 3. Provide a container registry location where you have permission to create
    images. This will typically be, for example, a personal Docker Hub or Quay.io
    account. You will be prompted for this value or you can set it via
-   `FAAS_REGISTRY` environment variable.
+   `FUNC_REGISTRY` environment variable.
    ```
    docker.io/<your username>
    ```
    or
    ```
-   export FAAS_REGISTRY=docker.io/<your username>
+   export FUNC_REGISTRY=docker.io/<your username>
    ```
 4. -Optional- Try jvm and native buiild for Quarkus 
    ```
-   kn faas build --builder native 
+   kn func build --builder native 
    ```
    ```
-   kn faas build --builder jvm
+   kn func build --builder jvm
    ```
 
 
@@ -199,7 +199,7 @@ need to have a Docker daemon running on your local computer.
 You can check for the image locally using the `docker` CLI.
 
 ```
-docker image ls (grep image: faas.yaml | cut -d/ -f2-3)
+docker image ls (grep image: func.yaml | cut -d/ -f2-3)
 ```
 
 ---
@@ -222,13 +222,13 @@ docker image ls (grep image: faas.yaml | cut -d/ -f2-3)
 2. Create and build a new image for Functions or reuse the previously created function image. ( If you are using quay.io, make sure the repo is public before attempting this step)
 3. Use the CLI to deploy the function as a knative service on the OpenShift Cluster. 
 ```
-kn faas deploy
+kn func deploy
 ```
 
 #### Validation
 Use the following command to confirm the deployed functions. 
  ```
- kn faas list
+ kn func list
  ```
  OR 
  ```
@@ -239,7 +239,7 @@ You can also see it on the Dev Console
 
 #### Cleanup
 When you have finished this scenario, you can remove the deployed function using
-`kn faas delete` from the Function project directory. You may also choose to
+`kn func delete` from the Function project directory. You may also choose to
 keep this deployment around for some of the next scenarios.
 
 ### Create a function that responds to CloudEvents and deploy it
@@ -247,7 +247,7 @@ keep this deployment around for some of the next scenarios.
 This scenario is different than the one above in that you will now create a
 Function project that can receive and respond with CloudEvents. To create a new
 project that can respond to events, use the `-t` flag. For example,
-`kn faas create -l node -t events` will create a new Function project in Node.js
+`kn func create -l node -t events` will create a new Function project in Node.js
 that can respond to CloudEvents. You can choose between Node.js and Quarkus for
 your project using the `-l` flag.
 
@@ -255,19 +255,19 @@ your project using the `-l` flag.
 
 1. Create the function project using the `kn` CLI.
    ```
-   kn faas create -l <node|quarkus> -t events
+   kn func create -l <node|quarkus> -t events
    ```
 1. Build the function using the `kn` CLI.
    ```
-   kn faas build
+   kn func build
    ```
 1. Run the function locally using the `kn` CLI.
    ```
-   kn faas run
+   kn func run
    ```
 1. Deploy the function to OpenShift using the `kn` CLI.
    ```
-   kn faas deploy
+   kn func deploy
    ```
 
 #### Validation
@@ -290,7 +290,7 @@ curl -X POST -d '{"name": "Tiger", "customerId": "0123456789"}' \
 #### Clean up
 
 When you have finished this scenario, you can remove the deployed function using
-`kn faas delete` from the Function project directory. You may also choose to
+`kn func delete` from the Function project directory. You may also choose to
 keep this deployment around for some of the next scenarios.
 
 ---
@@ -309,7 +309,7 @@ preceding scenario to do so.
 1. Deploy the updates to the cluster using the `kn` CLI. This will build a new
    container image and update your previously deployed function.
    ```
-   faas deploy
+   func deploy
    ```
 
 #### Validation
@@ -329,7 +329,7 @@ deployed Functions using the `kn` CLI.
 
 1. List the deployed functions with `kn`
    ```
-   kn faas list
+   kn func list
    ```
 
 #### Validation

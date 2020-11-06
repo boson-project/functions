@@ -21,13 +21,13 @@ under active development. We anticipate a limited Developer Preview in late fall
 
 ## How do I Use Boson Functions?
 
-For Function projects, a developer uses the `faas` CLI for project creation and
+For Function projects, a developer uses the `func` CLI for project creation and
 deployment. To get started using Boson Functions now, please follow the
 [step by step tutorial](tutorial.md).
 
 ### How does a Function Project get built?
 
-The `faas` CLI uses the CNCF Buildpack API to create a container image. The
+The `func` CLI uses the CNCF Buildpack API to create a container image. The
 [buildpacks](https://github.com/boson-project/buildpacks/)
 are based on and extend Red Hat UBI 8 and UBI 8 Minimal images.
 
@@ -64,7 +64,7 @@ POST request comprised of a `CloudEvent`.
 ## What is the tooling and architecture for the Boson Project?
 
 The primary tooling used by a function developer is the
-[`faas` CLI](https://github.com/boson-project/faas). Developers use this CLI to
+[`func` CLI](https://github.com/boson-project/faas). Developers use this CLI to
 create new function projects and deploy them to a Kubernetes cluster running
 Knative Serving and Eventing. During deployment, the developer's function code
 is combined with a runtime framework (for example Quarkus or Node.js) and a
@@ -75,7 +75,7 @@ the CNCF Buildpack APIs to create a runnable OCI container.
 ## What does a Boson Function look like?
 
 Boson Functions are simply that - functions. They are written in either Go,
-Node.js or Java/Quarkus. The Boson `faas` CLI can create a Boson Function
+Node.js or Java/Quarkus. The Boson `func` CLI can create a Boson Function
 project using a
 [template](https://github.com/boson-project/faas/tree/develop/templates) which
 provides the overall structure for your function. Here is a simple example
