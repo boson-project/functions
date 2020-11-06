@@ -78,12 +78,14 @@ mkdir fn.example.io
 cd fn.example.io
 ```
 
-Now, with one command we will create the project files, build a container, and
+Now, we will create the project files, build a container, and
 deploy the function as a Knative service.
 
 
 ```bash
 faas create -l node
+faas build
+faas deploy
 ```
 
 This will create a Node.js Function project in the current directory accepting
@@ -111,7 +113,8 @@ curl "http://fn-example-io.faas.127.0.0.1.nip.io?name=tiger"
 ```
 
 ## Local Development
-The `faas create` command also results in a docker container that can be run
+
+The `faas build` command results in a docker container that can be run
 locally with container ports mapped to localhost.
 
 ```bash
@@ -131,8 +134,8 @@ npm run local # Execute the function on the local host
 
 ## Deploying to a Cluster - Step by Step
 
-With `faas create` you have already deployed to a cluster! But there was a lot
-of magic in that one command. Let's break it down step by step using the
+With `faas deploy`, you have already deployed to a cluster! But there was a lot
+of magic. Let's break it down step by step using the
 `faas` CLI to take each step in turn.
 
 First, let's delete the project we just created.
@@ -156,13 +159,13 @@ Now, let's clean up the current directory.
 rm -rf *
 ```
 
-### `faas init`
+### `faas create`
 
 To create a new project structure without building a container or deploying to a
-cluster, use the `init` command.
+cluster, use the `create` command.
 
 ```bash
-faas init -l node -t http
+faas create -l node -t http
 ```
 
 You can also create a Quarkus or a Golang project by providing `quarkus` or `go`

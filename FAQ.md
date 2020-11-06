@@ -10,8 +10,7 @@ project are listed here.
 
 * Function runtimes for Go, Node.js and Quarkus
 * Buildpacks for Go, Node.js and Quarkus
-* A `faas` CLI for initializing, creating and deploying functions as a Knative
-  Service
+* A CLI for creating and managing functions as a Knative Service
 * Knative Serving and Eventing as the platform on which it all runs
 
 ## How mature is the Boson Project?

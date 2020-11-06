@@ -38,8 +38,8 @@ The major components of the Boson Project are:
   Quarkus. The buildpacks are based on the CNCF Buildpack specification and
   automate the process of converting a user's function from source code into a
   runnable OCI image.
-* A [CLI](https://github.com/boson-project/faas) for initializing, creating and
-  deploying functions as a Knative Service. The CLI may be run standalone in
+* A [CLI](https://github.com/boson-project/faas) for creating and managing
+  functions as a Knative Service. The CLI may be run standalone in
   vanilla Kubernetes environments, and it is also available as a compiled plugin
   for `kn` in the OpenShift Serverless Functions product.
 * A Kubernetes cluster with Knative Serving and Eventing installed

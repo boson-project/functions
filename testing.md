@@ -10,17 +10,17 @@ This document is written assuming that you are using the `kn` CLI with Functions
 capabilities as provided by OpenShift Serverless. To follow along in this
 document using the `boson-project/faas` distribution, simply execute the
 commands _without_ the preceding `kn`. For example the following command which
-initializes a new Node.js Function project that responds to CloudEvents looks
+creates a new Node.js Function project that responds to CloudEvents looks
 almost exactly the same.
 
 ***OpenShift Serverless Functions***
 ```
-kn faas init -l node -t events
+kn faas create -l node -t events
 ```
 
 ***Boson Project***
 ```
-faas init -l node -t events
+faas create -l node -t events
 ```
 
 ## Prerequisites
@@ -57,13 +57,13 @@ Please try to complete each of the following scenarios, noting where you ran
 into trouble (if at all).
 
 For more details on the CLI commands, check the
-[documentation](https://github.com/boson-project/faas/blob/main/docs/commands.md#init)
-or try `kn faas help init`.
+[documentation](https://github.com/boson-project/faas/blob/main/docs/commands.md#create)
+or try `kn faas help create`.
 
 ### Create a function that responds to HTTP
 
 The first scenario should get you comfortable with creating a Function project.
-Using the `kn` CLI, create a new project with `kn faas init`. You can choose
+Using the `kn` CLI, create a new project with `kn faas create`. You can choose
 between Node.js, Quarkus and Go for your project using the `-l` flag.
 
 #### Steps
@@ -73,9 +73,9 @@ between Node.js, Quarkus and Go for your project using the `-l` flag.
    mkdir myfunc
    cd myfunc
    ```
-1. Initialize the function project using the `kn` CLI.
+1. Create the function project using the `kn` CLI.
    ```
-   kn faas init -l <node|quarkus>
+   kn faas create -l <node|quarkus>
    ```
 
 #### Validation
@@ -101,7 +101,7 @@ Quarkus Function project will require Maven and a JDK.
 
 #### Steps
 
-1. Initialize a Function project or re-use an existing project from the first
+1. Create a Function project or re-use an existing project from the first
    scenario.
 1. (Node.js) Start the project
    ```
@@ -139,7 +139,7 @@ will first need to install some dependencies.
 
 #### Steps
 
-1. Initialize a Function project or re-use an existing project from the first
+1. Create a Function project or re-use an existing project from the first
    scenario.
 1. (Node) Install dependencies
    ```
@@ -168,11 +168,11 @@ need to have a Docker daemon running on your local computer.
 
 #### Steps
 
-1. Initialize a Function project or re-use an existing project from the first
+1. Create a Function project or re-use an existing project from the first
    scenario.
 2. Build the project
    ```
-   kn faas build
+   kn faas create
    ```
 3. Provide a container registry location where you have permission to create
    images. This will typically be, for example, a personal Docker Hub or Quay.io
@@ -219,7 +219,7 @@ docker image ls (grep image: faas.yaml | cut -d/ -f2-3)
 
 #### Steps
 1. Make sure you are logged onto the OpenShift Cluster from your local machine.
-2. Initialize and build a new image for Functions or reuse the previously created function image. ( If you are using quay.io, make sure the repo is public before attempting this step)
+2. Create and build a new image for Functions or reuse the previously created function image. ( If you are using quay.io, make sure the repo is public before attempting this step)
 3. Use the CLI to deploy the function as a knative service on the OpenShift Cluster. 
 ```
 kn faas deploy
@@ -247,15 +247,15 @@ keep this deployment around for some of the next scenarios.
 This scenario is different than the one above in that you will now create a
 Function project that can receive and respond with CloudEvents. To create a new
 project that can respond to events, use the `-t` flag. For example,
-`kn faas init -l node -t events` will create a new Function project in Node.js
+`kn faas create -l node -t events` will create a new Function project in Node.js
 that can respond to CloudEvents. You can choose between Node.js and Quarkus for
 your project using the `-l` flag.
 
 #### Steps
 
-1. Initialize the function project using the `kn` CLI.
+1. Create the function project using the `kn` CLI.
    ```
-   kn faas init -l <node|quarkus> -t events
+   kn faas create -l <node|quarkus> -t events
    ```
 1. Build the function using the `kn` CLI.
    ```
