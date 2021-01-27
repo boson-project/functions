@@ -12,7 +12,7 @@ This repository is a directory of information and resources for the project.
 * [Frequently asked questions](FAQ.md)
 * [Tutorial](tutorial.md)
 * [Kind cluster setup](kind-setup.md)
-* [CLI Download](https://boson-project/faas/releases)
+* [CLI Download](https://github.com/boson-project/func/releases)
 
 ## Using Boson Functions
 
@@ -31,14 +31,14 @@ please feel free to
 The major components of the Boson Project are:
 
 * Function
-  [runtime templates](https://github.com/boson-project/faas/tree/main/templates)
+  [runtime templates](https://github.com/boson-project/func/tree/main/templates)
   for Go, Node.js and Quarkus. The runtime is responsible for managing incoming
   CloudEvents or HTTP connections, and invoking the user function.
 * [Buildpacks](https://github.com/boson-project/buildpacks) for Go, Node.js and
   Quarkus. The buildpacks are based on the CNCF Buildpack specification and
   automate the process of converting a user's function from source code into a
   runnable OCI image.
-* A [CLI](https://github.com/boson-project/faas) for creating and managing
+* A [CLI](https://github.com/boson-project/func) for creating and managing
   functions as a Knative Service. The CLI may be run standalone in
   vanilla Kubernetes environments, and it is also available as a compiled plugin
   for `kn` in the OpenShift Serverless Functions product.
@@ -48,9 +48,9 @@ The major components of the Boson Project are:
 
 If you don't already have an OpenShift cluster with Serverless installed, or a
 Kubernetes cluster with Knative Serving and Eventing, you can follow our
-[Getting Started with Kubernetes Guide](https://github.com/boson-project/faas/blob/develop/docs/getting_started_kubernetes.md)
+[Getting Started with Kubernetes Guide](https://github.com/boson-project/func/blob/main/docs/getting_started_kubernetes.md)
 to provision a cluster for function deployment. Or for a quick and easy set up,
-follow our instructions for setting up a [kind cluster]('kind-setup.md') on your
+follow our instructions for setting up a [kind cluster](kind-setup.md) on your
 local system.
 
 ## Support
