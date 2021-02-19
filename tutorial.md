@@ -28,23 +28,23 @@ machine.
 
 ## Boson Tooling
 
-The primary interface for Boson project is the `faas` CLI.
-[Download][faas-download] the most recent version and install it some place
+The primary interface for Boson project is the `func` CLI.
+[Download][func-download] the most recent version and install it some place
 within your `$PATH`.
 
-[faas-download]: https://github.com/boson-project/faas/releases
+[func-download]: https://github.com/boson-project/faas/releases
 
 ```sh
 # Be sure to download the correct binary for your operating system
-curl -L -o - faas.gz https://github.com/boson-project/faas/releases/download/v0.8.0/faas_linux_amd64.gz | gunzip > faas && chmod 755 faas
-sudo mv faas /usr/local/bin
+curl -L -o - func.gz https://github.com/boson-project/faas/releases/download/v0.8.0/func_linux_amd64.gz | gunzip > func && chmod 755 func
+sudo mv func /usr/local/bin
 ```
 ## Configuring a Container Registry
 
 The unit of deployment in Boson Functions is an [OCI](https://opencontainers.org/)
 container image, typically referred to as a Docker container image.
 
-In order for the `faas` CLI to manage these containers, you'll need to be
+In order for the `func` CLI to manage these containers, you'll need to be
 logged in to a container registry. For example, `docker.io/lanceball`
 
 
@@ -55,21 +55,21 @@ logged in to a container registry. For example, `docker.io/lanceball`
 docker login -u lanceball -p [redacted] <registry.url>
 ```
 
-> Note: many of the `faas` CLI commands take a `--registry` argument.
-> Set the `FAAS_REGISTRY` environment variable in order to omit this
+> Note: many of the `func` CLI commands take a `--registry` argument.
+> Set the `FUNC_REGISTRY` environment variable in order to omit this
 > parameter when using the CLI.
 
 ```bash
 # This should be set to a registry that you have write permission
 # on and you have logged into in the previous step.
-export FAAS_REGISTRY=docker.io/lanceball
+export FUNC_REGISTRY=docker.io/lanceball
 ```
 
 ## Creating a Project
 
 With your Knative enabled cluster up and running, you can now create a new
 Function Project. Let's start by creating a project directory. Function names
-in `faas` correspond to URLs at the moment, and there are some finicky cases
+in `func` correspond to URLs at the moment, and there are some finicky cases
 at the moment. To ensure that everything works as it should, create a project
 directory consisting of three URL parts. Here is a good one.
 
@@ -83,19 +83,19 @@ deploy the function as a Knative service.
 
 
 ```bash
-faas create -l node
-faas build
-faas deploy
+func create -l node
+func build
+func deploy
 ```
 
 This will create a Node.js Function project in the current directory accepting
-all of the defaults inferred from your environment, for example`$FAAS_REGISTRY`.
+all of the defaults inferred from your environment, for example`$FUNC_REGISTRY`.
 When the command has completed, you can see the deployed function.
 
 ```bash
 kn service list
 NAME            URL                                          LATEST                  AGE   CONDITIONS   READY   REASON
-fn-example-io   http://fn-example-io.faas.127.0.0.1.nip.io   fn-example-io-ngswh-1   24s   3 OK / 3     True
+fn-example-io   http://fn-example-io.func.127.0.0.1.nip.io   fn-example-io-ngswh-1   24s   3 OK / 3     True
 ```
 
 Clicking on the URL will take you to the running function in your cluster. You
@@ -108,17 +108,17 @@ should see a simple response.
 You can add query parameters to the request to see those echoed in return.
 
 ```console
-curl "http://fn-example-io.faas.127.0.0.1.nip.io?name=tiger"
+curl "http://fn-example-io.func.127.0.0.1.nip.io?name=tiger"
 {"query":{"name":"tiger"},"name":"tiger"}
 ```
 
 ## Local Development
 
-The `faas build` command results in a docker container that can be run
+The `func build` command results in a docker container that can be run
 locally with container ports mapped to localhost.
 
 ```bash
-faas run
+func run
 ```
 
 For day to day development of the function, you can also run it locally outside
@@ -134,14 +134,14 @@ npm run local # Execute the function on the local host
 
 ## Deploying to a Cluster - Step by Step
 
-With `faas deploy`, you have already deployed to a cluster! But there was a lot
+With `func deploy`, you have already deployed to a cluster! But there was a lot
 of magic. Let's break it down step by step using the
-`faas` CLI to take each step in turn.
+`func` CLI to take each step in turn.
 
 First, let's delete the project we just created.
 
 ```bash
-faas delete
+func delete
 ```
 
 You might see a message such as this.
@@ -159,36 +159,36 @@ Now, let's clean up the current directory.
 rm -rf *
 ```
 
-### `faas create`
+### `func create`
 
 To create a new project structure without building a container or deploying to a
 cluster, use the `create` command.
 
 ```bash
-faas create -l node -t http
+func create -l node -t http
 ```
 
 You can also create a Quarkus or a Golang project by providing `quarkus` or `go`
 respectively to the `-l` flag. To create a project with a template for
 CloudEvents, provide `events` to the `-t` flag.
 
-### `faas build`
+### `func build`
 
 To build the OCI container image for your function project, you can use the
 `build` command.
 
 ```bash
-faas build
+func build
 ```
 
 This creates a runnable container image that listens on port 8080 for incoming
 HTTP requests.
 
-### `faas deploy`
+### `func deploy`
 
 To deploy the image to your cluster, use the `deploy` command. You can also use
 this command to update a Function deployment after making changes locally.
 
 ```bash
-faas deploy
+func deploy
 ```
