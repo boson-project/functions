@@ -11,7 +11,7 @@ and run functions as a Knative Service on Kubernetes. The major components of
 this project are listed here.
 
 * Function runtimes for Go, Node.js and Quarkus
-* Buildpacks for Go, Node.js and Quarkus
+* Buildpacks for Go, Node.js, SpringBoot and Quarkus
 * A CLI for creating and managing functions as a Knative Service
 * Knative Serving and Eventing as the platform on which it all runs
 
@@ -25,7 +25,7 @@ Knative is the target deployment platform for Serverless Functions.
 
 ## How do I Use Serverless Functions?
 
-For Function projects, a developer uses the `kn-func` CLI for project creation
+For Function projects, a developer uses the `kn func` CLI for project creation
 and deployment.  Developers use this CLI to create new function projects and
 deploy them to a Kubernetes cluster running Knative Serving and Eventing.
 During deployment, the developer's function code is combined with a runtime
@@ -37,7 +37,7 @@ tutorial](tutorial.md).
 
 ## How does a Function Project get built?
 
-The `kn-func` CLI uses the CNCF Buildpack API to create a container image. The
+The `kn func` CLI uses the CNCF Buildpack API to create a container image. The
 [buildpacks](https://github.com/boson-project/buildpacks/) are based on and
 extend Red Hat UBI 8 and UBI 8 Minimal images.
 
