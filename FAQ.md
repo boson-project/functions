@@ -10,7 +10,7 @@ Serverless Functions are a collection of tools that enable developers to create
 and run functions as a Knative Service on Kubernetes. The major components of
 this project are listed here.
 
-* Function runtimes for Go, Node.js and Quarkus
+* Function runtimes for Go, Node.js, SpringBoot and Quarkus
 * Buildpacks for Go, Node.js, SpringBoot and Quarkus
 * A CLI for creating and managing functions as a Knative Service
 * Knative Serving and Eventing as the platform on which it all runs
