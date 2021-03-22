@@ -306,15 +306,3 @@ npm install --save opossum
 
 When the project is built for deployment, these dependencies will be included
 in the resulting runtime container image.
-
-## Testing
-The function templates come complete with a few simple tests. Your project will
-contain a test folder with two files.
-
-* `test/unit.js` exercises the function in isolation, outside of network requests
-* `test/integration.js` loads and invokes the function over HTTP
-
-The test framework used in these files is
-https://www.npmjs.com/package/tape[tape], but this is only by choice of the
-template authors. Developers may choose any other testing framework that they
-are comfortable with. To run the tests, execute “npm test”.
